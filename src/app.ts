@@ -4,8 +4,11 @@ import KoaCors from '@koa/cors';
 import path from 'path';
 import router from './router/index';
 import Static from 'koa-static';
+import jwt from 'koa-jwt';
+import config from '../config/config';
 
 const app = new Koa();
+
 app.use(
   KoaBody({
     multipart: true,
@@ -16,6 +19,12 @@ app.use(
       maxFieldsSize: 2 * 1024 * 1024,
       onFileBegin: (name, file) => {},
     },
+  }),
+);
+app.use(
+  jwt({ secret: config.secretKey }).unless({
+    method: ['GET'],
+    path: [/^\/user\/login/],
   }),
 );
 app.use(Static(path.resolve(__dirname, '../public')));
