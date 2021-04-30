@@ -11,7 +11,6 @@ import { User } from './User';
 import { Category } from './Category';
 
 export interface ArticleModel {
-  user_id: number;
   article_id: number;
   article_title: string;
   article_content: string;
@@ -59,9 +58,6 @@ export class Article extends Model<ArticleModel> {
 
   @Column
   article_tags: string;
-
-  @HasOne(() => User, 'user_id')
-  user: User;
 
   @HasOne(() => Category, 'category_id')
   category: Category;

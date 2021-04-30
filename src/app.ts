@@ -1,14 +1,21 @@
 import Koa from 'koa';
 import KoaBody from 'koa-body';
 import KoaCors from '@koa/cors';
+import jwt from 'koa-jwt';
+import KoaLog from 'koa-logger';
 import path from 'path';
 import router from './router/index';
 import Static from 'koa-static';
-import jwt from 'koa-jwt';
 import config from '../config/config';
 
 const app = new Koa();
 
+// app.use(
+//   KoaLog((str, args) => {
+//     console.log('str', str);
+//     console.log('type', args);
+//   }),
+// );
 app.use(
   KoaBody({
     multipart: true,

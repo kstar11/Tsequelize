@@ -18,17 +18,11 @@ router.get('/', async (ctx) => {
       'article_date',
       'article_category',
       'article_tags',
-      [Sequelize.col('user.user_name'), 'user_name'],
       [Sequelize.col('category.category_name'), 'category_name'],
     ],
     limit: Number(pageSize),
     offset: offset,
     include: [
-      {
-        model: User,
-        attributes: [],
-        where: {},
-      },
       {
         model: Category,
         attributes: [],

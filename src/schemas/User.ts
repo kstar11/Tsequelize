@@ -9,7 +9,6 @@ import {
   PrimaryKey,
 } from 'sequelize-typescript';
 import dayjs from 'dayjs';
-import { Article } from './Article';
 dayjs.locale('zh-cn');
 
 export interface UserModel {
@@ -31,17 +30,11 @@ export interface UserModel {
 })
 export class User extends Model<UserModel> {
   @PrimaryKey
-  @ForeignKey(() => Article)
   @Column
   user_id: number;
 
-  @BelongsTo(() => Article, 'user_id')
-  article: Article;
-
   @Unique
-  @Column({
-    primaryKey: true,
-  })
+  @Column
   user_name: string;
 
   @Column
