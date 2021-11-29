@@ -46,6 +46,17 @@ router.post('/login', async (ctx) => {
 });
 
 router.post('/', async (ctx) => {
+  const {
+    body: { user_name, user_password, user_email, user_nickname },
+  } = ctx.request;
+
+  if (!user_name || !user_password || !user_email || !user_nickname) {
+    ctx.body = {
+      code: 400,
+      message: '用户名,密码,电子邮箱,用户昵称不能为空',
+    };
+    return;
+  }
   const result = await User.create(ctx.request.body);
   ctx.body = {
     code: 200,
